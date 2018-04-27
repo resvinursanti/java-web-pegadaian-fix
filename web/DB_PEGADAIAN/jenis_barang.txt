@@ -1,0 +1,17 @@
+CREATE TABLE  "JENIS_BARANG" 
+   (	"ID_JENIS_BARANG" VARCHAR2(5) NOT NULL ENABLE, 
+	"NAMA_JENIS_BARANG" VARCHAR2(55), 
+	 CONSTRAINT "JENIS_BARANG_PK" PRIMARY KEY ("ID_JENIS_BARANG") ENABLE
+   ) ;
+
+CREATE OR REPLACE TRIGGER  "BI_JENIS_BARANG" 
+  before insert on "JENIS_BARANG"               
+  for each row  
+begin   
+  if :NEW."ID_JENIS_BARANG" is null then 
+    select "JENIS_BARANG_SEQ".nextval into :NEW."ID_JENIS_BARANG" from dual; 
+  end if; 
+end; 
+
+/
+ALTER TRIGGER  "BI_JENIS_BARANG" ENABLE;

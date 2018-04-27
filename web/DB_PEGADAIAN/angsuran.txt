@@ -1,0 +1,52 @@
+
+Table
+Data
+Indexes
+Model
+Constraints
+Grants
+Statistics
+UI Defaults
+Triggers
+Dependencies
+SQL
+
+CREATE TABLE  "ANGSURAN" 
+   (	"ID_ANGSURAN" VARCHAR2(5) NOT NULL ENABLE, 
+	"ID_GADAI" VARCHAR2(5) NOT NULL ENABLE, 
+	"ID_CUSTOMER" VARCHAR2(5) NOT NULL ENABLE, 
+	"TANGGAL_ANGSURAN" DATE, 
+	"JUMLAH_ANGSURAN" NUMBER(15,0), 
+	"DENDA" NUMBER(15,0), 
+	 CONSTRAINT "ANGSURAN_PK" PRIMARY KEY ("ID_ANGSURAN") ENABLE
+   ) ;ALTER TABLE  "ANGSURAN" ADD CONSTRAINT "ANGSURAN_FK" FOREIGN KEY ("ID_GADAI")
+	  REFERENCES  "GADAI" ("ID_GADAI") ENABLE;ALTER TABLE  "ANGSURAN" ADD CONSTRAINT "ANGSURAN_FK2" FOREIGN KEY ("ID_CUSTOMER")
+	  REFERENCES  "CUSTOMER" ("ID_CUSTOMER") ENABLE;
+
+CREATE OR REPLACE TRIGGER  "BI_ANGSURAN" 
+  before insert on "ANGSURAN"               
+  for each row  
+begin   
+  if :NEW."ID_ANGSURAN" is null then 
+    select "ANGSURAN_SEQ".nextval into :NEW."ID_ANGSURAN" from dual; 
+  end if; 
+end; 
+
+/
+ALTER TRIGGER  "BI_ANGSURAN" ENABLE;
+
+CREATE OR REPLACE TRIGGER  "GADAISISA" 
+after insert or delete on angsuran
+for each row
+begin
+if inserting then
+update gadai set sisa = sisa-:new.jumlah_angsuran
+where id_gadai=:new.id_gadai;
+end if;
+if deleting then
+update gadai set sisa = sisa+:new.jumlah_angsuran
+where id_gadai=:new.id_gadai;
+end if;
+end;
+/
+ALTER TRIGGER  "GADAISISA" ENABLE;
