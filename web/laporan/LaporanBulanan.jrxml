@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="725" pageHeight="842" columnWidth="685" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c4ba19a1-ee46-4629-8716-54af8f3ba350">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="tgl1" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="tgl2" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     ANGSURAN."ID_ANGSURAN" AS ANGSURAN_ID_ANGSURAN,
+     ANGSURAN."ID_GADAI" AS ANGSURAN_ID_GADAI,
+     ANGSURAN."ID_CUSTOMER" AS ANGSURAN_ID_CUSTOMER,
+     ANGSURAN."TANGGAL_ANGSURAN" AS ANGSURAN_TANGGAL_ANGSURAN,
+     ANGSURAN."JUMLAH_ANGSURAN" AS ANGSURAN_JUMLAH_ANGSURAN,
+     ANGSURAN."DENDA" AS ANGSURAN_DENDA,
+     CUSTOMER."NAMA_CUSTOMER" AS CUSTOMER_NAMA_CUSTOMER
+FROM
+     "HR"."CUSTOMER" CUSTOMER INNER JOIN "HR"."ANGSURAN" ANGSURAN ON CUSTOMER."ID_CUSTOMER" = ANGSURAN."ID_CUSTOMER"
+WHERE
+     TANGGAL_ANGSURAN BETWEEN $P{tgl1} and $P{tgl2}]]>
+	</queryString>
+	<field name="ANGSURAN_ID_ANGSURAN" class="java.lang.String"/>
+	<field name="ANGSURAN_ID_GADAI" class="java.lang.String"/>
+	<field name="ANGSURAN_ID_CUSTOMER" class="java.lang.String"/>
+	<field name="ANGSURAN_TANGGAL_ANGSURAN" class="java.sql.Timestamp"/>
+	<field name="ANGSURAN_JUMLAH_ANGSURAN" class="java.math.BigDecimal"/>
+	<field name="ANGSURAN_DENDA" class="java.math.BigDecimal"/>
+	<field name="CUSTOMER_NAMA_CUSTOMER" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="96" splitType="Stretch">
+			<staticText>
+				<reportElement x="188" y="0" width="309" height="69" uuid="d0652a52-ed76-400a-a48a-b9f9a9a8e9c5"/>
+				<textElement verticalAlignment="Middle">
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LAPORAN ANGSURAN ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="233" y="69" width="46" height="20" uuid="dd6245c4-2aea-4680-9c6e-05c8fbbb0b0d"/>
+				<text><![CDATA[Periode    :]]></text>
+			</staticText>
+			<textField pattern="dd MMMMM yyyy">
+				<reportElement x="279" y="69" width="66" height="20" uuid="ede6fc4a-644f-43a3-94c9-78135216e512"/>
+				<textFieldExpression><![CDATA[$P{tgl1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="345" y="69" width="21" height="20" uuid="72f5a572-78e4-4633-8a89-7154d3587d6a"/>
+				<text><![CDATA[s/d]]></text>
+			</staticText>
+			<textField pattern="dd MMMMM yyyy">
+				<reportElement x="366" y="69" width="77" height="20" uuid="ea784356-508a-4749-be04-2857ff8c07a5"/>
+				<textFieldExpression><![CDATA[$P{tgl2}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="31" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="41" width="100" height="20" forecolor="#FFFFFF" backcolor="#666666" uuid="18c3f5c3-7675-4b13-9b99-9979a0631970"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[ID Angsuran]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="100" y="41" width="100" height="20" forecolor="#FFFFFF" backcolor="#666666" uuid="baad9d28-ab3a-4f61-9a86-b5f8521296e1"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[ID Gadai]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="200" y="41" width="100" height="20" forecolor="#FFFFFF" backcolor="#666666" uuid="37f6df6f-0eff-4ca9-bc3b-29bb4454651a"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[ID Customer]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="300" y="41" width="100" height="20" forecolor="#FFFFFF" backcolor="#666666" uuid="1d4b1bd8-141a-4ec0-8f6b-9ef10510f068"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Nama Customer]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="400" y="41" width="100" height="20" forecolor="#FFFFFF" backcolor="#666666" uuid="8f71e909-6003-4708-a05d-c5879f2e3b32"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Tanggal Angsuran]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="500" y="41" width="100" height="20" forecolor="#FFFFFF" backcolor="#666666" uuid="00e0ba10-9b15-4733-bb00-fb79da205e22"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Jumlah Angsuran]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="600" y="41" width="85" height="20" forecolor="#FFFFFF" backcolor="#666666" uuid="d0ce9023-b6b1-4e3c-b7e2-e3e353e1255d"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Denda]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="28" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="2" width="100" height="20" uuid="1c4d92cd-9599-44f2-8cfb-003e75c50f01"/>
+				<textFieldExpression><![CDATA[$F{ANGSURAN_ID_ANGSURAN}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="2" width="100" height="20" uuid="f15f8329-bc32-4976-b2e0-035173bd0246"/>
+				<textFieldExpression><![CDATA[$F{ANGSURAN_ID_GADAI}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="2" width="100" height="20" uuid="33be03b7-dad8-40ee-8e33-f387e56be537"/>
+				<textFieldExpression><![CDATA[$F{ANGSURAN_ID_CUSTOMER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="400" y="2" width="100" height="20" uuid="6665550d-8307-4847-a237-a7711c634ecd"/>
+				<textFieldExpression><![CDATA[$F{ANGSURAN_TANGGAL_ANGSURAN}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="500" y="2" width="100" height="20" uuid="7100944f-9354-441d-969e-f4be4817c9b9"/>
+				<textFieldExpression><![CDATA[$F{ANGSURAN_JUMLAH_ANGSURAN}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="600" y="2" width="85" height="20" uuid="2c8c3e35-07cb-4949-ba60-85bb76531289"/>
+				<textFieldExpression><![CDATA[$F{ANGSURAN_DENDA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="2" width="100" height="20" uuid="956e5d51-5d08-40f9-8cb8-14c4c0b779a6"/>
+				<textFieldExpression><![CDATA[$F{CUSTOMER_NAMA_CUSTOMER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
